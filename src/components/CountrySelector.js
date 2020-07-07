@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, FormControl, InputLabel, Select, MenuItem, } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -8,41 +8,61 @@ const useStyle = makeStyles((theme) => ({
         "margin": theme.spacing(1),
         "width": '100%',
     },
-    mainGrid:{
-        margin:'20px auto 0 auto'
+    mainGrid: {
+        margin: '20px auto 0 auto'
     },
-    inputLabel:{
-        color:'white',
-        fontSize:'larger',
+    inputLabel: {
+        color: 'white',
+        fontSize: 'larger',
     },
-    select:{
-        fontWeight:'bold',
-        fontSize:'large'
+    select: {
+        fontWeight: 'bold',
+        fontSize: 'large'
     }
 
 }))
 
-export default function () {
+async function fetch_api(countries, setCountries) {
+    let url = 'https://api.thevirustracker.com/free-api?countryTotals=ALL';
+    const response = await fetch(url);
+    const { countryitems } = await response.json();
+    const countries_object = {};
+    // console.log(countryitems[0]);
+    for (const key in countryitems[0]) {
+        const { title, code, ourid } = countryitems[0][key];
+        countries_object[title] = { "title": title, "code": code, "id": ourid };
+    };
+
+    setCountries({ ...countries, ...countries_object });
+}
+
+export default function ({ handleChangeCountry }) {
 
     const classes = useStyle();
+    const [countries, setCountries] = React.useState({ "Global": { "title": "Global", "code": "global", "id": 0 } });
+    const [country, setCountry] = React.useState(countries.Global.title);
 
-    const [country, setCountry] = React.useState('');
-
-    const countries = ["Global", 'Pakistan', 'India', "China"];
+    useEffect(() => {
+        fetch_api(countries, setCountries);
+    }, []);
 
     return (
-        <Grid xs={12} sm={6} container item  className={classes.mainGrid}>
+        <Grid xs={12} sm={6} container item className={classes.mainGrid}>
             <FormControl className={classes.formControl}>
                 <InputLabel id="select-country-label" className={classes.inputLabel}>Select Country</InputLabel>
                 <Select
                     className={classes.select}
                     labelId="select-country-label"
                     id="select-country"
-                    // value={country}
+                    value={country}
                     defaultValue={countries[0]}
-                    onChange={(event) => { setCountry(event.target.value) }}
+                    onChange={(event) => {
+                        const selectVal = event.target.value;
+                        setCountry(selectVal);
+                        handleChangeCountry(countries[event.target.value].code)
+                    }}
                 >
-                    {countries.map((option, i) => <MenuItem key={i} value={option}>{option}</MenuItem>)}
+                    {Object.values(countries).map(cntry => <MenuItem key={Number(cntry.id).toString()} value={cntry.title}>{cntry.title}</MenuItem>)}
                 </Select>
             </FormControl>
         </Grid>

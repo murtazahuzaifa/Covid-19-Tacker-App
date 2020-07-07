@@ -19,7 +19,7 @@ const useStyle = makeStyles((theme) => ({
     }
 }))
 
-export default function () {
+export default function ({totalData}) {
 
     const classes = useStyle();
 
@@ -32,7 +32,7 @@ export default function () {
             <Grid xs={xs} sm={sm} item >
                 <Paper elevation={3} className={`${classes.paper} ${classes.totalCases}`} >
                     <Typography variant='h5' color='textPrimary'>
-                        <CountUp start={0} end={10623651} duration={2.75} separator="," />
+                        <CountUp start={0} end={totalData.infected} duration={2.75} separator="," />
                     </Typography>
                     <Typography variant='subtitle1'> Total Infected </Typography>
                 </Paper>
@@ -41,7 +41,7 @@ export default function () {
             <Grid xs={xs} sm={sm} item >
                 <Paper elevation={3} className={`${classes.paper} ${classes.totalActive}`}>
                     <Typography variant='h5' color='textPrimary'>
-                        <CountUp start={0} end={37868} duration={2.75} separator="," />
+                        <CountUp start={0} end={totalData.active} duration={2.75} separator="," />
                     </Typography>
                     <Typography variant='subtitle1'> Total Active </Typography>
                 </Paper>
@@ -50,7 +50,7 @@ export default function () {
             <Grid xs={xs} sm={sm} item >
                 <Paper elevation={3} className={`${classes.paper} ${classes.totalRecoverd}`}>
                     <Typography variant='h5' color='textPrimary'>
-                        <CountUp start={0} end={5828630} duration={2.75} separator="," />
+                        <CountUp start={0} end={totalData.recovered} duration={2.75} separator="," />
                     </Typography>
                     <Typography variant='subtitle1'> Total Recovered </Typography>
                 </Paper>
@@ -59,7 +59,7 @@ export default function () {
             <Grid xs={xs} sm={sm} item >
                 <Paper elevation={3} className={`${classes.paper} ${classes.totalDeaths}`}>
                     <Typography variant='h5' color='textPrimary'>
-                        <CountUp start={0} end={514798} duration={2.75} separator="," />
+                        <CountUp start={0} end={totalData.deaths} duration={2.75} separator="," />
                     </Typography>
                     <Typography variant='subtitle1'> Total Deaths </Typography>
                 </Paper>
