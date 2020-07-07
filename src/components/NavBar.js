@@ -8,8 +8,8 @@ import GitHub from '@material-ui/icons/GitHub';
 // import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
-    toolBar:{
-        display:'flex',
+    toolBar: {
+        display: 'flex',
         justifyContent: 'space-between',
     },
     gitHub: {
@@ -29,8 +29,9 @@ export default function ButtonAppBar() {
                 <Typography variant="h6" className={classes.title}>
                     COVID-19 Tracker App
                     </Typography>
-                <IconButton  color="inherit" aria-label="github-link">
-                    <GitHub className={classes.gitHub} />
+                <IconButton color="inherit" aria-label="github-link" className={classes.gitHub}
+                    href="https://github.com/murtazahuzaifa/Covid-19-Tacker-App" target='_blank'>
+                    <GitHub />
                 </IconButton>
             </Toolbar>
         </AppBar>

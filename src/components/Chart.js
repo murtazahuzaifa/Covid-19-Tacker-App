@@ -33,13 +33,14 @@ export default function ({ historicalData }) {
             data: historicalData.infected,
             label: 'Infected',
             borderColor: 'blue',
+            backgroundColor: 'rgba(0, 0, 250, 0.2)',
             fill: true,
           },
           {
             data: historicalData.recovered,
             label: 'Recovered',
             borderColor: 'green',
-            backgroundColor: 'rgba(255, 0, 0, 0.5)',
+            backgroundColor: 'rgba(0, 250, 0, 0.3)',
             fill: true,
           },
           {
