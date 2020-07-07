@@ -14,24 +14,6 @@ const useStyle = makeStyles((theme) => ({
   }
 }))
 
-const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-  datasets: [
-    {
-      data: [50, 60, 70, 80, 55, 33, 44],
-      label: 'Infected',
-      borderColor: '#3333ff',
-      fill: true,
-    }, {
-      data: [50, 30, 70, 50, 75, 33, 94],
-      label: 'Deaths',
-      borderColor: 'red',
-      backgroundColor: 'rgba(255, 0, 0, 0.5)',
-      fill: true,
-    },
-  ]
-};
-
 export default function ({ historicalData }) {
 
   const classes = useStyle();

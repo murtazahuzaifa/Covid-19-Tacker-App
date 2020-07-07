@@ -44,7 +44,7 @@ export default function ({ handleChangeCountry }) {
 
     useEffect(() => {
         fetch_api(countries, setCountries);
-    }, []);
+    }, [countries]);
 
     return (
         <Grid xs={12} sm={6} container item className={classes.mainGrid}>
